@@ -42,33 +42,41 @@ namespace CustomListUnitTestProj
 
         public void RemoveMethod(T itemToRemove)
         {
-            if (count > capacity)
+            
+            if (capacity > count)
             {
-                T[] newArray = new T[capacity];
 
-              
+                for (int i = 0; i < items.Length; i++)
+                {
+                    if (items[i].Equals(itemToRemove))
+                    {
+                        items[i] = itemToRemove;
+                        items[i] = items[i + 1];
+                        items[i] = items[count];
+                        
+                    }                       
+                }               
             }
-            items[count] = itemToRemove;
             count--;
         }
 
-        public void StringMethod(T itemToAdd)
-        {
-            if (count > capacity)
-            {
-                //create new  array
-                T[] newArray = new T[8];
-                //move items over
+        //public void StringMethod(T itemToAdd)
+        //{
+        //    if (count > capacity)
+        //    {
+        //        //create new  array
+        //        T[] newArray = new T[8];
+        //        //move items over
 
-                items[1].Equals(newArray[1]);
-                items[2].Equals(newArray[2]);
-                items[3].Equals(newArray[3]);
+        //        items[1].Equals(newArray[1]);
+        //        items[2].Equals(newArray[2]);
+        //        items[3].Equals(newArray[3]);
 
 
-                //new array is now _items array.
-            }
-            items[count] = itemToAdd;
-            count++;
-        }
+        //        //new array is now _items array.
+        //    }
+        //    items[count] = itemToAdd;
+        //    count++;
+        //}
     }
 }
