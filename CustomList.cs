@@ -26,16 +26,14 @@ namespace CustomListUnitTestProj
            
             if (count == capacity)
             {
-                //create new  array
-                T[] newArray = new T[capacity];
-                //move items over
-                T[] oldArray = items;
+
+                T[] newArray = new T[capacity];               
                 for(int i = 0; i < newArray.Length; i++ )
                 {
-                    oldArray[count] = itemToAdd;
-                    itemToAdd = newArray[capacity * 2];
-                }
-                                                                                                         
+
+                    newArray[i] = items[i];
+                    newArray[i] = newArray[capacity * 2];
+                }               
             }
             items[count] = itemToAdd;
             count++;
@@ -46,10 +44,9 @@ namespace CustomListUnitTestProj
         {
             if (count > capacity)
             {
-                //create new  array
-                T[] newArray = new T[8];
-                //move items over         
-                //new array is now _items array.
+                T[] newArray = new T[capacity];
+
+              
             }
             items[count] = itemToRemove;
             count--;
