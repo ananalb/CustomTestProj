@@ -7,33 +7,59 @@ using System.Threading.Tasks;
 
 namespace CustomListUnitTestProj
 {
-    public class CustomList <T>
+    public class CustomList<T>
     {
-        public T[] items;
-        public int count;
-        public int capacity;
+        private T[] items;
+        private int count;
+        private int capacity;
+
+        public int Count
+        {
+            get
+            {
+                return count;
+            }
+        }
+     
+
+
 
         public CustomList()
         {
-           
-          count = 0;
-          capacity = 4;
-          items = new T[capacity];
-            
+
+            count = 0;
+            capacity = 4;
+            items = new T[capacity];
         }
+
+        public int Capacity
+        {
+            get
+            {
+                return capacity;
+            }
+        }
+        public T this[int index]
+        {
+            get => items[index];
+            set => items[index] = value;
+        }
+        
+         
         public void AddMethod(T itemToAdd)
         {
-           
+
             if (count == capacity)
             {
 
-                T[] newArray = new T[capacity];               
-                for(int i = 0; i < newArray.Length; i++ )
+                T[] newArray = new T[capacity *= 2];
+                for (int i = 0; i < count; i++)
                 {
 
                     newArray[i] = items[i];
-                    newArray[i] = newArray[capacity * 2];
-                }               
+                    
+                }
+                items = newArray;
             }
             items[count] = itemToAdd;
             count++;
@@ -42,41 +68,40 @@ namespace CustomListUnitTestProj
 
         public void RemoveMethod(T itemToRemove)
         {
-            
-            if (capacity > count)
-            {
-
-                for (int i = 0; i < items.Length; i++)
+           
+                T[] newArray = new T[capacity];
+                for (int i = 0, j = 0; i < count; i++, j++)
                 {
                     if (items[i].Equals(itemToRemove))
                     {
-                        items[i] = itemToRemove;
-                        items[i] = items[i + 1];
-                        items[i] = items[count];
-                        
-                    }                       
-                }               
-            }
-            count--;
+                        j--;
+                        count--;
+                    }
+                    else
+                    {
+                        newArray[j] = items[i];
+                    }
+                }
+            items = newArray;
+            
         }
 
-        //public void StringMethod(T itemToAdd)
-        //{
-        //    if (count > capacity)
-        //    {
-        //        //create new  array
-        //        T[] newArray = new T[8];
-        //        //move items over
+        public override string ToString()
+        {
+            string Finalstring = "";
+            for(int i = 0; i < count; i++)
+            {
+               
+                Finalstring += items[i].ToString();
+                
 
-        //        items[1].Equals(newArray[1]);
-        //        items[2].Equals(newArray[2]);
-        //        items[3].Equals(newArray[3]);
+            }
+            return Finalstring;
+        }
+        
 
 
-        //        //new array is now _items array.
-        //    }
-        //    items[count] = itemToAdd;
-        //    count++;
-        //}
+
     }
+    
 }
