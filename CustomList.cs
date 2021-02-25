@@ -20,9 +20,6 @@ namespace CustomListUnitTestProj
                 return count;
             }
         }
-     
-
-
 
         public CustomList()
         {
@@ -44,8 +41,8 @@ namespace CustomListUnitTestProj
             get => items[index];
             set => items[index] = value;
         }
-        
-         
+
+
         public void AddMethod(T itemToAdd)
         {
 
@@ -57,7 +54,7 @@ namespace CustomListUnitTestProj
                 {
 
                     newArray[i] = items[i];
-                    
+
                 }
                 items = newArray;
             }
@@ -68,40 +65,103 @@ namespace CustomListUnitTestProj
 
         public void RemoveMethod(T itemToRemove)
         {
-           
-                T[] newArray = new T[capacity];
-                for (int i = 0, j = 0; i < count; i++, j++)
+
+            T[] newArray = new T[capacity];
+            for (int i = 0, j = 0; i < count; i++, j++)
+            {
+                if (items[i].Equals(itemToRemove))
                 {
-                    if (items[i].Equals(itemToRemove))
-                    {
-                        j--;
-                        count--;
-                    }
-                    else
-                    {
-                        newArray[j] = items[i];
-                    }
+                    j--;
+                    count--;
                 }
+                else
+                {
+                    newArray[j] = items[i];
+                }
+            }
             items = newArray;
-            
+
         }
 
         public override string ToString()
         {
             string Finalstring = "";
-            for(int i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
-               
+
                 Finalstring += items[i].ToString();
-                
+
 
             }
             return Finalstring;
         }
-        
 
+        public static CustomList<T> operator +(CustomList<T> one, CustomList<T> two)
+        {
+            CustomList<T> customList = new CustomList<T>();
+            for (int i = 0; i < one.Count; i++)
+            {
+                customList.AddMethod(one[i]);
 
+            }
+            for (int i = 0; i < two.Count; i++)
+            {
+                customList.AddMethod(two[i]);
+            }
 
+            return customList;
+        }
+
+        public static CustomList<T> operator -(CustomList<T> one, CustomList<T> two)
+        {
+
+            CustomList<T> customList = new CustomList<T>();
+
+            for (int i = 0; i < one.count; i++)
+            {
+                for (int j = 0; j < two.count; j++)
+                {
+                    if (one[i].Equals(two[j]))
+                    {
+                        customList.RemoveMethod(one[i]);
+                    }
+                }
+            }
+
+            for (int i = 0; i < two.count; i++)
+            {
+                for (int j = 0; j < one.count; j++)
+                {
+                    if (two[i].Equals(one[j]))
+                    {
+                        customList.RemoveMethod(two[i]);
+                    }
+                }
+
+            }
+            return customList;
+        }
     }
+
+ }
+
+
+
+
+
+        //    public IEnumerable GetEnumerator()
+        //    {
+
+        //        for (int index = 0; index < items.Count; index++)
+        //        {
+        //            yield return items[i];
+
+        //        }
+        //        yield return "";
+
+        //    }
+
+        //}
     
-}
+    
+
