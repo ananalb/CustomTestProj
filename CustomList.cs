@@ -64,16 +64,18 @@ namespace CustomListUnitTestProj
 
         }
 
-        public void RemoveMethod(T itemToRemove)
+        public bool RemoveMethod(T itemToRemove)
         {
 
             T[] newArray = new T[capacity];
+            bool isRemoved = false;
             for (int i = 0, j = 0; i < count; i++, j++)
             {
                 if (items[i].Equals(itemToRemove))
                 {
                     j--;
-                    count--;
+                    isRemoved = true;
+                    
                 }
                 else
                 {
@@ -81,6 +83,11 @@ namespace CustomListUnitTestProj
                 }
             }
             items = newArray;
+            if (isRemoved == true)
+            {
+                count--;
+            }
+            return isRemoved;
 
         }
 
@@ -143,7 +150,18 @@ namespace CustomListUnitTestProj
             return customList;
         }
 
-        public IEnumerable GetEnumerator()
+
+        //public static CustomList<T> Zip(CustomList<T> listOne, CustomList<T> listTwo)
+        //{
+        //    CustomList<T> listThree = new CustomList<T>();
+        //    for (int i = 0; i < listOne.count; i++)
+        //    {
+        //        listThree.AddMethod(listOne[i]);
+        //        listThree.AddMethod(listTwo[i]);
+        //    }
+        //}
+
+        public IEnumerator GetEnumerator()
         {
             for (int i = 0; i < count; i++)
             {
