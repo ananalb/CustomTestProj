@@ -28,3 +28,6 @@ dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
 
 #do not prefer accessibility modifiers to be specified
 dotnet_style_require_accessibility_modifiers = never:suggestion
+
+# CS1583: Error reading Win32 resources -- Image is too small.
+dotnet_diagnostic.CS1583.severity = silent

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
-using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,10 +37,31 @@ namespace CustomListUnitTestProj
                 return capacity;
             }
         }
-        public T this[int index]
+        public T this[int i]
         {
-            get => items[index];
-            set => items[index] = value;
+            get
+            {
+                if(i<0 || i > count)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+                else
+                {
+                    return items[i];
+                }
+
+            }
+            set
+            {
+                if(i<0 || i > count)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+                else
+                {
+                    items[i] = value;
+                }
+            }
         }
 
 
@@ -94,15 +114,12 @@ namespace CustomListUnitTestProj
 
         public override string ToString()
         {
-            string Finalstring = "";
-            for (int i = 0; i < count; i++)
+            StringBuilder stringBuilder = new StringBuilder();
+            for(int i = 0; i < Count; i++)
             {
-
-                Finalstring += items[i].ToString();
-
-
+                stringBuilder.Append(items[i]);
             }
-            return Finalstring;
+            return stringBuilder.ToString();
         }
 
         public static CustomList<T> operator +(CustomList<T> one, CustomList<T> two)
@@ -131,14 +148,12 @@ namespace CustomListUnitTestProj
 
             for (int i = 0; i < itemsToRemove.count; i++)
             {
-                resultList.Remove(itemsToRemove[i]);               
+                resultList.Remove(itemsToRemove[i]);
             }
 
             return resultList;
 
         }
-
-
 
         public static CustomList<T> Zip(CustomList<T> listOne, CustomList<T> listTwo)
         {
@@ -154,7 +169,7 @@ namespace CustomListUnitTestProj
                     }
                 }
             else
-            {             
+            {
                 for (int i = 0; i < listTwo.count; i++)
                 {
                     listThree.Add(listTwo[i]);
@@ -176,10 +191,38 @@ namespace CustomListUnitTestProj
             }
         }
 
-       
 
+        public static CustomList<T> Sort(CustomList<T> newList)
+        {
+            CustomList<int> intArray = new CustomList<int> { 2, 9, 4, 3, 5, 1, 7 };
+            int list = 0;
+            for (int i = 0; i <= intArray.count - 1; i++)
+            {
+                for (int j = i + 1; j < intArray.count; j++)
+                {
+                    if (intArray[i] > intArray[j])
+                    {
+                        list = intArray[i];
+                        intArray[i] = intArray[j];
+                        intArray[j] = list;
+                    }
+                   
+                }
+                Console.WriteLine("Array sort in ascending order");
+                foreach (var item in newList)
+                {
+                    Console.WriteLine(item);
+                    Console.ReadLine();
+                }
+            }
+            return newList;
+
+        }
     }
 }
+    
+
+
 
 
 
