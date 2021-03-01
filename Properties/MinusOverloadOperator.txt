@@ -1,0 +1,40 @@
+﻿-Operator Overload Details and Functionality for Custom List: 
+
+    public static CustomList<T> operator -(CustomList<T> baseList, CustomList<T> itemsToRemove)
+//The syntax of the operator includes two parameters , baseList and itemsToRemove
+        {
+            CustomList<T> resultList = new CustomList<T>();
+            for (int i = 0; i < baseList.count; i++)
+            {
+                resultList.Add(baseList[i]);
+//Loop through the base list and add onto the new list the items that need to be kept
+            }
+
+            for (int i = 0; i < itemsToRemove.count; i++)
+            {
+                resultList.Remove(itemsToRemove[i]);   
+//Loop through the list that the items are being taken out of, and take out each item from the list that isn't needed         
+            }
+
+            return resultList;
+// Since the CustomList<T> is a list, we need a return type that is also a list
+
+        }
+
+Example: 
+
+ CustomList<int> one = new CustomList<int>() { 1, 3, 5 }; 
+ CustomList<int> two = new CustomList<int>() { 3, 7, 1 };
+// We create two lists with different values using IEnuremable
+CustomList<int> expected = new CustomList<int>() { 7 };
+// We expect the value of 7 after we compare and remove each item from list two
+CustomList<int> actual;
+
+
+actual = two - one;
+// Remove 3 and 1 from list two and return what is needed in list two Only
+
+
+Assert.AreEqual(expected.ToString(), actual.ToString());
+// Compare and see if the expected and actual values are both 7
+

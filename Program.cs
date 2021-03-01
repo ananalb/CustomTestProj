@@ -10,21 +10,10 @@ namespace CustomListUnitTestProj
     {
         static void Main(string[] args)
         {
-            CustomList<int> customlist1 = new CustomList<int>();
-            CustomList<int> customlist2 = new CustomList<int>();
-            customlist1.AddMethod(1);
-            customlist1.AddMethod(3);
-            customlist1.AddMethod(5);
-            customlist2.AddMethod(2);
-            customlist2.AddMethod(4);
-            customlist2.AddMethod(6);
-            //customlist2.AddMethod(7);
+            CustomList<int> one = new CustomList<int>() { 1, 3, 5 };
+            CustomList<int> two = new CustomList<int>() { 3, 7, 1 };
 
-            CustomList<int> result =  CustomList<int>.Zip(customlist1, customlist2);
-
-
-
-
+            CustomList<int> result = one - two;
 
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,7 +45,7 @@ namespace CustomListUnitTestProj
         }
 
 
-        public void AddMethod(T itemToAdd)
+        public void Add(T itemToAdd)
         {
 
             if (count == capacity)
@@ -64,7 +65,7 @@ namespace CustomListUnitTestProj
 
         }
 
-        public bool RemoveMethod(T itemToRemove)
+        public bool Remove(T itemToRemove)
         {
 
             T[] newArray = new T[capacity];
@@ -109,44 +110,32 @@ namespace CustomListUnitTestProj
             CustomList<T> customList = new CustomList<T>();
             for (int i = 0; i < one.Count; i++)
             {
-                customList.AddMethod(one[i]);
+                customList.Add(one[i]);
 
             }
             for (int i = 0; i < two.Count; i++)
             {
-                customList.AddMethod(two[i]);
+                customList.Add(two[i]);
             }
 
             return customList;
         }
 
-        public static CustomList<T> operator -(CustomList<T> one, CustomList<T> two)
+        public static CustomList<T> operator -(CustomList<T> baseList, CustomList<T> itemsToRemove)
         {
-
-            CustomList<T> customList = new CustomList<T>();
-
-            for (int i = 0; i < one.count; i++)
+            CustomList<T> resultList = new CustomList<T>();
+            for (int i = 0; i < baseList.count; i++)
             {
-                for (int j = 0; j < two.count; j++)
-                {
-                    if (one[i].Equals(two[j]))
-                    {
-                        customList.RemoveMethod(one[i]);
-                    }
-                }
+                resultList.Add(baseList[i]);
             }
-            for (int i = 0; i < two.count; i++)
-            {
-                for (int j = 0; j < one.count; j++)
-                {
-                    if (two[i].Equals(one[j]))
-                    {
-                        customList.RemoveMethod(two[i]);
-                    }
-                }
 
+            for (int i = 0; i < itemsToRemove.count; i++)
+            {
+                resultList.Remove(itemsToRemove[i]);               
             }
-            return customList;
+
+            return resultList;
+
         }
 
 
@@ -155,30 +144,30 @@ namespace CustomListUnitTestProj
         {
 
             CustomList<T> listThree = new CustomList<T>();
-            if(listOne.count >= listTwo.count)
-            for (int i = 0; i < listOne.count; i++)
-            {
-                listThree.AddMethod(listOne[i]);
-                if (i < listTwo.count)
+            if (listOne.count >= listTwo.count)
+                for (int i = 0; i < listOne.count; i++)
                 {
-                    listThree.AddMethod(listTwo[i]);
+                    listThree.Add(listOne[i]);
+                    if (i < listTwo.count)
+                    {
+                        listThree.Add(listTwo[i]);
+                    }
                 }
-            }
             else
-            {                    
-                    for (int i = 0; i < listTwo.count; i++)
+            {             
+                for (int i = 0; i < listTwo.count; i++)
                 {
-                    listThree.AddMethod(listTwo[i]);
+                    listThree.Add(listTwo[i]);
                     if (i < listOne.count)
                     {
-                        listThree.AddMethod(listOne[i]);
+                        listThree.Add(listOne[i]);
                     }
                 }
             }
             return listThree;
         }
-    
-                              
+
+
         public IEnumerator GetEnumerator()
         {
             for (int i = 0; i < count; i++)
@@ -186,10 +175,13 @@ namespace CustomListUnitTestProj
                 yield return items[i];
             }
         }
+
+       
+
     }
 }
 
-    
-    
-    
+
+
+
 
