@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,7 +75,7 @@ namespace CustomListUnitTestProj
                 {
                     j--;
                     isRemoved = true;
-                    
+
                 }
                 else
                 {
@@ -135,7 +135,6 @@ namespace CustomListUnitTestProj
                     }
                 }
             }
-
             for (int i = 0; i < two.count; i++)
             {
                 for (int j = 0; j < one.count; j++)
@@ -151,16 +150,35 @@ namespace CustomListUnitTestProj
         }
 
 
-        //public static CustomList<T> Zip(CustomList<T> listOne, CustomList<T> listTwo)
-        //{
-        //    CustomList<T> listThree = new CustomList<T>();
-        //    for (int i = 0; i < listOne.count; i++)
-        //    {
-        //        listThree.AddMethod(listOne[i]);
-        //        listThree.AddMethod(listTwo[i]);
-        //    }
-        //}
 
+        public static CustomList<T> Zip(CustomList<T> listOne, CustomList<T> listTwo)
+        {
+
+            CustomList<T> listThree = new CustomList<T>();
+            if(listOne.count >= listTwo.count)
+            for (int i = 0; i < listOne.count; i++)
+            {
+                listThree.AddMethod(listOne[i]);
+                if (i < listTwo.count)
+                {
+                    listThree.AddMethod(listTwo[i]);
+                }
+            }
+            else
+            {                    
+                    for (int i = 0; i < listTwo.count; i++)
+                {
+                    listThree.AddMethod(listTwo[i]);
+                    if (i < listOne.count)
+                    {
+                        listThree.AddMethod(listOne[i]);
+                    }
+                }
+            }
+            return listThree;
+        }
+    
+                              
         public IEnumerator GetEnumerator()
         {
             for (int i = 0; i < count; i++)
