@@ -190,32 +190,22 @@ namespace CustomListUnitTestProj
                 yield return items[i];
             }
         }
-
-
-        public static CustomList<T> Sort(CustomList<T> newList)
+        public static CustomList<T> Sort(CustomList<T> myList) //ascending order
         {
-            CustomList<int> intArray = new CustomList<int> { 2, 9, 4, 3, 5, 1, 7 };
-            int list = 0;
-            for (int i = 0; i <= intArray.count - 1; i++)
+            CustomList<int> intList = new CustomList<int>();
+            for (int i = 0; i <= myList.count - 1; i++)
             {
-                for (int j = i + 1; j < intArray.count; j++)
+                for (int j = i + 1; j < myList.count; j++)
                 {
-                    if (intArray[i] > intArray[j])
+                    if (i > j)
                     {
-                        list = intArray[i];
-                        intArray[i] = intArray[j];
-                        intArray[j] = list;
+                        intList.Add(i);
+                        intList[i] = intList[j];                      
+                        intList.Add(j);
                     }
-                   
-                }
-                Console.WriteLine("Array sort in ascending order");
-                foreach (var item in newList)
-                {
-                    Console.WriteLine(item);
-                    Console.ReadLine();
                 }
             }
-            return newList;
+            return myList;
 
         }
     }
